@@ -8,6 +8,6 @@ class testHelloWorld
     public static void main(String args[]) 
     { 
         System.out.println("Hello, World");
-	System.out.println("Test234, World"); 
+	System.out.println("Test2345, World"); 
     } 
 }
