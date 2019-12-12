@@ -1,0 +1,8 @@
+- name: Install virtual box onto production Node
+  hosts: azure
+  user: azureuser
+  become: no
+
+  tasks:
+  - name: Install Kubectl
+    command: minikube start --vm-driver=virtualbox

@@ -1,0 +1,22 @@
+- name: Install Kubectl and minikube onto production Node
+  hosts: azure
+  user: azureuser
+  become: yes
+
+  tasks:
+
+  - stat:
+      path: /home/azureuser/minikube_kubectl_new.sh
+    register: result
+
+  - name: Copy minikube_kubectl_new.sh to Node
+    copy:
+      src: ./minikube_kubectl_new.sh
+      dest: /home/azureuser/minikube_kubectl_new.sh
+    when: result.stat.exists == false
+
+  - name: Set minikube_kubectl_new.sh permissions
+    command: chmod +x /home/azureuser/minikube_kubectl_new.sh
+
+  - name: Run minikube_kubectl installation script
+    command: ./minikube_kubectl_new.sh

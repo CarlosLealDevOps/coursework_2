@@ -1,0 +1,15 @@
+- name: Run Docker App on Node
+  hosts: azure
+  user: azureuser
+  become: yes
+
+  vars:
+    DockerID: cleal200
+
+  tasks:
+  - name: Get Docker Image
+    command: docker pull "{{DockerID}}"/server_js
+
+  - name: Launch Docker Container
+    command: docker container run --rm -d -p 80:80 --name server_js "{{DockerID}}"/server_js
+

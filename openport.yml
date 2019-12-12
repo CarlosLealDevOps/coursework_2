@@ -1,0 +1,38 @@
+  - name: Open port 80 on Production VM
+    hosts: localhost
+    connection: local
+
+    vars:
+     myResourceGroup: kubernetescoursework2
+     myVnet: production-node-vnet
+     mySubnet: production-node-subnet
+     myPublicIP: production-node-publicip
+     myNIC: production -vm-nic
+     myNetworkSecurityGroup: coursework2-sg
+     myVM: production-node
+
+    tasks:
+
+    - name: Open port 22
+      azure_rm_securitygroup:
+       resource_group: "{{myResourceGroup}}"
+       name: "{{myNetworkSecurityGroup}}"
+       rules:
+        - name: SSH
+          protocol: Tcp
+          destination_port_range: 22
+          access: Allow
+          priority: 1000
+          direction: Inbound
+
+    - name: Open port 80
+      azure_rm_securitygroup:
+       resource_group: "{{myResourceGroup}}"
+       name: "{{ myNetworkSecurityGroup }}"
+       rules:
+        - name: Port_80
+          protocol: Tcp
+          destination_port_range: 80
+          access: Allow
+          priority: 1001
+          direction: Inbound
