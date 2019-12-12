@@ -1,0 +1,8 @@
+- name: Connect to Node VM
+  hosts: azure
+  user: azureuser
+  become: yes
+
+  tasks:
+  -  name: Scale deployment to 10 users
+     command: ssh azureuser@13.70.7.22 kubectl scale deployments/serverjs --replicas=10
