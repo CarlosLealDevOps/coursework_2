@@ -1,12 +1,13 @@
-pipeline{
-    agent any
-    stages{
-        stage ('build'){
-            steps{
-                echo 'build'
-            }
-        }
-        stage('Static Analysis') {
+  
+pipeline {
+  environment {
+    registry = "cleal200/serverjs"
+    registryCredential = '17912e02-131e-46cd-9034-4081cf8f6fa8'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+      stage('Static Analysis') {
     environment {
         scannerHome = tool 'SonarQube'
     }
@@ -19,11 +20,21 @@ pipeline{
         }
     }
 }
-        stage ('deploy'){
-            steps{
-                echo 'deploy'
-            }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
         }
+      }
     }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+  }
 }
-
