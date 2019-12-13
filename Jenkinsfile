@@ -38,7 +38,7 @@ pipeline {
     }
     stage('Deploy Image to Production VM') {
       steps{
-        sh 'ssh -t azureuser@13.70.7.22 kubectl set image deployments/serverjs serverjs=cleal200/serverjs:v2'
+        sh 'ssh -t azureuser@13.70.7.22 kubectl set image deployments/serverjs serverjs=cleal200/serverjs:v4'
       }
     }
   }
