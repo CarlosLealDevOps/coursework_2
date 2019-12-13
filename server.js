@@ -1,4 +1,4 @@
-var http = require('http');
+[Bvar http = require('http');
 var requests=0;
 var podname= process.env.HOSTNAME;
 var startTime;
@@ -21,4 +21,4 @@ www.listen(8080,function () {
     console.log ("Hello World Started At:",startTime, "| Running On: " ,host, "\n" );
 });
 
-/////
+///////
