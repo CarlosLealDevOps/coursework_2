@@ -1,0 +1,9 @@
+- name: Configure Node VM
+  hosts: azure
+  user: azureuser
+  become: no
+
+  tasks:
+
+  - name: Install Various Packages
+    command: kubectl create deployment serverjs --image=cleal200/serverjs:v1 

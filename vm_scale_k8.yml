@@ -1,0 +1,9 @@
+- name: Scale k8
+  hosts: azure
+  user: azureuser
+  become: no
+
+  tasks:
+
+  - name: Scale k8
+    command: kubectl scale deployments/serverjs --replicas=4

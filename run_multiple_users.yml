@@ -1,0 +1,33 @@
+- name: Start the image deploy script on Node VM
+
+  hosts: azure
+
+  user: azureuser
+
+  become: yes
+
+  tasks:
+
+  - stat:
+
+      path: /home/azureuser/multiple_users.sh
+
+    register: result
+
+  - name: Copy multiple_users.sh to Node
+
+    copy:
+
+      src: ./multiple_users.sh
+
+      dest: /home/azureuser/multiple_users.sh
+
+    when: result.stat.exists == false
+
+  - name: Set multiple_users.sh permissions
+
+    command: chmod +x /home/azureuser/multiple_users.sh
+
+  - name: Run k8 image deploy script
+
+    command: ./multiple_users.sh
